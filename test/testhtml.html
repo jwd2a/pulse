@@ -1,0 +1,22 @@
+<html>
+	<head>
+		
+	</head>
+	<script>
+			var tracker = {};
+			tracker.track = function(UID, UIDType){
+				console.log(UID);
+				console.log(UIDType);
+			var request = new XMLHttpRequest();
+				request.open("POST", "http://localhost:3000/events", true);
+				request.send({
+					UID: UID,
+					UIDType: UIDType
+				});
+			}
+	</script>
+	<body>
+		<a onclick="tracker.track('12345', 'testUID')">Click Me</a>
+	</body>
+	
+</html>
