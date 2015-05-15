@@ -15,6 +15,7 @@ router.get("/", function(req, res){
 
 router.post("/", function(req, res){
 	var event = new Event({
+		type: req.body.eventType,
 		UID: req.body.UID,
 		UIDType: req.body.UIDType
 	});
