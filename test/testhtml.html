@@ -3,20 +3,22 @@
 		
 	</head>
 	<script>
-			var tracker = {};
-			tracker.track = function(UID, UIDType){
-				console.log(UID);
-				console.log(UIDType);
-			var request = new XMLHttpRequest();
-				request.open("POST", "http://localhost:3000/events", true);
-				request.send({
-					UID: UID,
-					UIDType: UIDType
-				});
-			}
+		var tracker = {};
+			tracker.siteKey = //insert your site key here
+			tracker.track = function(eventType, UID, UIDType){
+		var request = new XMLHttpRequest();
+			request.setRequestHeader("Content-type", "application/json");
+			request.open("POST", "http://sleepy-cliffs-1333.herokuapp.com/events", true);
+			request.send({
+				apiKey: tracker.siteKey,
+				eventType: eventType,
+				UID: UID,
+				UIDType: UIDType
+			});
+		}
 	</script>
 	<body>
-		<a onclick="tracker.track('12345', 'testUID')">Click Me</a>
+		<a onclick="tracker.track('click', '12345', 'testUID')">Click Me</a>
 	</body>
 	
 </html>

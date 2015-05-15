@@ -88,8 +88,13 @@ app.use(function(err, req, res, next) {
 });
 
 //connect to the database
+if(process.env.MONGOLAB_URI){
+    mongoose.connect(process.env.MONGOLAB_URI);   
+}else{
+    mongoose.connect("mongodb://localhost:27017/eventTracker");
+}
 
-mongoose.connect(process.env.MONGOLAB_URI);
+mongoose.set('debug', true);
 
 
 module.exports = app;
