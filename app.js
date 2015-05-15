@@ -89,7 +89,7 @@ app.use(function(err, req, res, next) {
 
 //connect to the database
 
-mongoose.connect('mongodb://localhost:27017/eventTracker');
+mongoose.connect(process.env.MONGOLAB_URI);
 
 
 module.exports = app;
