@@ -29,7 +29,6 @@ var allowCrossDomain = function(req, res, next) {
 };
 
 app.use(allowCrossDomain);
-app.disable("etag");
 
 // view engine setup
 
