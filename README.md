@@ -2,6 +2,10 @@
 
 This library is designed to provide low-level analytics and data intelligence about events that happen on your site or app. By tracking discrete user actions and using multivariate analysis, Pulse can identify what events cause other events to happen.
 
+## Prerequisites
+
+Pulse requires jQuery. So, get that.
+
 ## Installation
 
 - Include `lib/track.js` at the bottom of every page.
