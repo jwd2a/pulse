@@ -1,41 +1,44 @@
 <html>
-	<head>
-		<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-	</head>
-	<body>
-		<a href="http://www.google.com" data-action="click" data-uid="12345" data-uidType="userId">Click Me</a>
-		<script>
-			$(document).ready(function(){
-				var tracker = {};
-				tracker.siteKey = "a129afc8-3fb7-165a-7fde-0b591f60868a";
-				$("*[data-action]").click(function(e){
-					$.ajax({
-						type: "POST",
-						url: "http://localhost:3000/events",
-						data: {
-							apiKey: tracker.siteKey,
-							eventType: 	$(e.currentTarget).attr("data-action"),
-							UID:  		$(e.currentTarget).attr("data-uid"),
-							UIDType: 	$(e.currentTarget).attr("data-uidType"),
-							eToken: 	tracker.trackingKey
-						}
-					});
-				});
-				tracker.createTrackingKey = function(){
-					function s4() {
-    					return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
- 					 }
- 					 return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
-				}
-				
-				//check if we have a user already in localstore, if not, create one.
-				if(!window.localStorage.getItem("eToken")){
-					window.localStorage.setItem("eToken", tracker.createTrackingKey());
-				}else{
-					tracker.trackingKey = window.localStorage.getItem("eToken");
-				}
-			});
-		</script>
-	</body>
+  
+  <head>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+  </head>
+  
+  <body>
+    <a href="http://www.google.com" data-pulse-action="click" data-pulse-uid="12345" data-pulse-uidType="userId">Click Me</a>
+    <script>
+      $(document).ready(function(){
+  				var tracker = {};
+  				tracker.siteKey = "a129afc8-3fb7-165a-7fde-0b591f60868a";
+  				$("*[data-pulse-action]").click(function(e){
+            e.preventDefault();
+          $.ajax({
+            type: "POST",
+            url: "http://localhost:3000/events",
+            data: {
+              apiKey: tracker.siteKey,
+              eventType: 	$(e.currentTarget).attr("data-pulse-action"),
+              UID:  		$(e.currentTarget).attr("data-pulse-uid"),
+              UIDType: 	$(e.currentTarget).attr("data-pulse-uidType"),
+              eToken: 	tracker.trackingKey
+            }
+          });
+       });
+        
+        tracker.createTrackingKey = function(){
+          function s4() {
+            return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
+          }
+          return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
+        }
+        
+        if(!window.localStorage.getItem("pulseEToken")){
+          window.localStorage.setItem("pulseEToken", tracker.createTrackingKey());
+        }else{
+          tracker.trackingKey = window.localStorage.getItem("pulseEToken");
+        }
+     });
+    </script>
+  </body>
 
 </html>
