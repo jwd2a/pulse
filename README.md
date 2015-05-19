@@ -11,9 +11,9 @@ This library is designed to provide low-level analytics and data intelligence ab
 
 Pulse uses HTML5 data attributes to configure event tracking. Simply include the following on any item where you want to track an action:
 
-`data-action` (String) : The name of the event you want to log ("click", "like", "postPhoto", etc.)
-`data-UID` (String) : A unique identifier from your database
-`data-UIDType` (String) : The type of UID you've provided. Example: a user ID.
+- `data-action` (String) : The name of the event you want to log ("click", "like", "postPhoto", etc.)
+- `data-UID` (String) : A unique identifier from your database
+- `data-UIDType` (String) : The type of UID you've provided. Example: a user ID.
 
 Pulse will also automatically track a user across multiple sessions, allowing you to identify users that transition from authed to non-authed, or who use mutliple accounts to log in from a single machine.
 
