@@ -5,6 +5,7 @@ var Event = new mongoose.Schema({
 	type: String,
 	UID: String,
 	UIDType: String,
+	eToken: String,
 	createdAt: Date
 });
 

@@ -23,7 +23,8 @@ router.post("/", function (req, res) {
 				site: req.body.apiKey,
 				type: req.body.eventType,
 				UID: req.body.UID,
-				UIDType: req.body.UIDType
+				UIDType: req.body.UIDType,
+				eToken: req.body.eToken
 			});
 			event.save(function (err, event) {
 				if (event) {
