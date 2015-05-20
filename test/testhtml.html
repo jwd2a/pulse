@@ -10,34 +10,52 @@
       $(document).ready(function(){
   				var tracker = {};
   				tracker.siteKey = "a129afc8-3fb7-165a-7fde-0b591f60868a";
-  				$("*[data-pulse-action]").click(function(e){
-            e.preventDefault();
-          $.ajax({
-            type: "POST",
-            url: "http://localhost:3000/events",
-            data: {
-              apiKey: tracker.siteKey,
-              eventType: 	$(e.currentTarget).attr("data-pulse-action"),
-              UID:  		$(e.currentTarget).attr("data-pulse-uid"),
-              UIDType: 	$(e.currentTarget).attr("data-pulse-uidType"),
-              eToken: 	tracker.trackingKey
-            }
+  				//listener for all links
+          $("a").click(function(e){
+            $.ajax({
+              type: "POST",
+              url: "http://localhost:3000/events",
+              data: {
+                apiKey: tracker.siteKey,
+                eventType: "linkClick",
+                meta: {
+                  page: window.location.href,
+                  link: $(e.currentTarget).attr("href")
+                }
+              }
+            });
           });
-       });
-        
-        tracker.createTrackingKey = function(){
-          function s4() {
-            return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
+          
+          //listener for custom data-action items
+          $("*[data-pulse-action]").click(function(e){
+            $.ajax({
+              type: "POST",
+              url: "http://localhost:3000/events",
+              data: {
+                apiKey: tracker.siteKey,
+                eventType: 	$(e.currentTarget).attr("data-pulse-action"),
+                UID:  		  $(e.currentTarget).attr("data-pulse-uid"),
+                UIDType:  	$(e.currentTarget).attr("data-pulse-uidType"),
+                eToken: 	  tracker.trackingKey
+              }
+            });
+          });
+          
+          tracker.createTrackingKey = function(){
+            function s4() {
+              return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
+            }
+            return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
           }
-          return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
-        }
-        
-        if(!window.localStorage.getItem("pulseEToken")){
-          window.localStorage.setItem("pulseEToken", tracker.createTrackingKey());
-        }else{
-          tracker.trackingKey = window.localStorage.getItem("pulseEToken");
-        }
-     });
+          
+          var lsToken = "pulseEToken-" + tracker.siteKey;
+          
+          if(!window.localStorage.getItem(lsToken)){
+            window.localStorage.setItem(lsToken, tracker.createTrackingKey());
+          }else{
+            tracker.trackingKey = window.localStorage.getItem(lsToken);
+          }
+       });
     </script>
   </body>
 

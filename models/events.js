@@ -6,6 +6,7 @@ var Event = new mongoose.Schema({
 	UID: String,
 	UIDType: String,
 	eToken: String,
+	meta: Object,
 	createdAt: Date
 });
 

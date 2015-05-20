@@ -25,6 +25,7 @@ router.post("/", function (req, res) {
 				UID: req.body.UID,
 				UIDType: req.body.UIDType,
 				eToken: req.body.eToken,
+				meta: req.body.meta,
 				createdAt: new Date()
 			});
 			event.save(function (err, event) {
